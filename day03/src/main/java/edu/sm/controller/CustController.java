@@ -1,5 +1,6 @@
 package edu.sm.controller;
 
+import com.github.pagehelper.PageInfo;
 import edu.sm.app.dto.CustDto;
 import edu.sm.app.service.CustService;
 import lombok.RequiredArgsConstructor;
@@ -57,12 +58,28 @@ public class CustController {
     }
     @RequestMapping("/get")
     public String get(Model model) throws Exception {
-        List<CustDto> custs = new ArrayList<>();
+        List<CustDto> custs = null;
         custs = custService.get();
 
         model.addAttribute("custs",custs);
         model.addAttribute("left",dir+"left");
         model.addAttribute("center",dir+"get");
+        return "index";
+    }
+    @RequestMapping("/getpage")
+    public String getpage(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo, Model model) throws Exception {
+        PageInfo<CustDto> p;
+        p = new PageInfo<>(custService.getPage(pageNo), 5);
+        model.addAttribute("cpage",p);
+        model.addAttribute("target","/cust");
+        model.addAttribute("left",dir+"left");
+        model.addAttribute("center",dir+"page");
+        return "index";
+    }
+    @RequestMapping("/search")
+    public String search(Model model) {
+        model.addAttribute("left",dir+"left");
+        model.addAttribute("center",dir+"search");
         return "index";
     }
 
