@@ -2,6 +2,7 @@ package edu.sm.controller;
 
 import com.github.pagehelper.PageInfo;
 import edu.sm.app.dto.CustDto;
+import edu.sm.app.dto.Search;
 import edu.sm.app.service.CustService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -78,6 +79,15 @@ public class CustController {
     }
     @RequestMapping("/search")
     public String search(Model model) {
+        model.addAttribute("left",dir+"left");
+        model.addAttribute("center",dir+"search");
+        return "index";
+    }
+    @RequestMapping("/findimpl")
+    public String findimpl(Model model, Search search) {
+        log.info("Search : " + search.toString());
+
+        model.addAttribute("search",search);
         model.addAttribute("left",dir+"left");
         model.addAttribute("center",dir+"search");
         return "index";
