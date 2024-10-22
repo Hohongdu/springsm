@@ -11,6 +11,15 @@
     <select id="getpage" resultType="custDto">
         SELECT * FROM cust
     </select>
+    <select id="getfindpage" resultType="custDto">
+        SELECT * FROM cust where 1 = 1
+        <if test = "keyword == 'id'">
+            AND cust_id LIKE '%' || #{search} || '%'
+        </if>
+        <if test = "keyword == 'name'">
+            AND cust_name LIKE '%' || #{search} || '%'
+        </if>
+    </select>
 
 
 
