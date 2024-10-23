@@ -1,11 +1,9 @@
 package edu.sm.controller;
 
-import com.github.pagehelper.PageInfo;
 import edu.sm.app.dto.CustDto;
-import edu.sm.app.dto.Search;
 import edu.sm.app.service.CustService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,87 +13,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@Slf4j
-@RequiredArgsConstructor
 @RequestMapping("/cust")
+@RequiredArgsConstructor
 public class CustController {
 
     final CustService custService;
 
-    String dir = "cust/";
 
-    @RequestMapping("")
-    public String cust(Model model) {
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"center");
+    String dir = "cust/";
+    @RequestMapping("/get")
+    public String get(Model model) throws Exception {
+        // Database에서 데이터를 가지고 온다.
+        List<CustDto> list = new ArrayList<>();
+        try {
+            list = custService.get();
+            model.addAttribute("custs",list);
+            model.addAttribute("center",dir+"get");
+        } catch (Exception e) {
+            throw new Exception("ER0001");
+        }
         return "index";
-    }
-    @RequestMapping("/detail")
-    public String detail(Model model, @RequestParam("id") String id) throws Exception {
-        CustDto custDto = null;
-        custDto = custService.get(id);
-        model.addAttribute("cust",custDto);
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"detail");
-        return "index";
-    }
-    @RequestMapping("/updateimpl")
-    public String updateimpl(Model model,  CustDto custDto
-    ) throws Exception {
-        custService.modify(custDto);
-        return "redirect:/cust/detail?id="+custDto.getCustId();
-    }
-    @RequestMapping("/deleteimpl")
-    public String deleteimpl(Model model,  @RequestParam("id") String id
-    ) throws Exception {
-        custService.del(id);
-        return "redirect:/cust/get";
     }
     @RequestMapping("/add")
-    public String add(Model model) {
-        model.addAttribute("left",dir+"left");
+    public String add(Model model){
+
         model.addAttribute("center",dir+"add");
         return "index";
     }
-    @RequestMapping("/getpage")
-    public String getpage(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo, Model model) throws Exception {
-        PageInfo<CustDto> p;
-        p = new PageInfo<>(custService.getPage(pageNo), 5); // 5:하단 네비게이션 개수
-        model.addAttribute("cpage",p);
-        model.addAttribute("target","/cust");
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"page");
+
+
+    @RequestMapping("/detail")
+    public String detail(Model model,@RequestParam("id") String id){
+        // Database에서 데이터를 가지고 온다.
+        CustDto custDto = null;
+        try {
+            custDto = custService.get(id);
+            model.addAttribute("cust", custDto);
+            model.addAttribute("center",dir+"detail");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return "index";
     }
-    @RequestMapping("/search")
-    public String search(Model model) {
+    @RequestMapping("/update")
+    public String update(Model model,CustDto custDto){
 
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"search");
-        return "index";
+        try {
+            custService.modify(custDto);
+            return "redirect:/cust/detail?id="+custDto.getCustId();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-    @RequestMapping("/findimpl")
-    public String findimpl(Model model, Search search, @RequestParam(value = "pageNo", defaultValue = "1") int pageNo) throws Exception {
-        PageInfo<CustDto> p;
+    @RequestMapping("/addimpl")
+    public String addimpl(Model model,CustDto custDto) throws Exception {
+        custService.add(custDto);
+        return "redirect:/cust/detail?id="+custDto.getCustId();
 
-        p = new PageInfo<>(custService.getFindPage(pageNo, search), 3); // 5:하단 네비게이션 개수
-        model.addAttribute("cpage",p);
-        model.addAttribute("target","cust");
-        model.addAttribute("search",search);
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"search");
-        return "index";
     }
+    @RequestMapping("/delete")
+    public String delete(Model model,@RequestParam("id") String id){
 
-    @RequestMapping("/get")
-    public String get(Model model) throws Exception {
-        List<CustDto> custs = null;
-        custs = custService.get();
-
-        model.addAttribute("custs",custs);
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"get");
-        return "index";
+        try {
+            custService.del(id);
+            return "redirect:/cust/get";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }

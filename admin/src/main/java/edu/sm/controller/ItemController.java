@@ -1,47 +1,75 @@
 package edu.sm.controller;
 
-import edu.sm.app.dto.Item;
+import edu.sm.app.dto.ItemDto;
+import edu.sm.app.service.ItemService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
-@Slf4j
 @RequestMapping("/item")
+@RequiredArgsConstructor
+@Slf4j
 public class ItemController {
 
+    private final ItemService itemService;
     String dir = "item/";
 
-    @RequestMapping("")
-    public String item(Model model) {
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"center");
-        return "index";
-    }
     @RequestMapping("/add")
-    public String add(Model model) {
-        model.addAttribute("left",dir+"left");
+    public String add(Model model) throws Exception {
         model.addAttribute("center",dir+"add");
         return "index";
     }
-    @RequestMapping("/get")
-    public String get(Model model) {
-        List<Item> items = new ArrayList<>();
-        items.add(Item.builder().id(1).name("KORONE").price(10000).imgname("p1.jpg").regdate(new Date()).build());
-        items.add(Item.builder().id(2).name("SAKURA MIKO").price(20000).imgname("p2.jpg").regdate(new Date()).build());
-        items.add(Item.builder().id(3).name("OTONOSE KANADE").price(500000).imgname("p3.jpg").regdate(new Date()).build());
-        items.add(Item.builder().id(4).name("USADA PEKORA").price(40000).imgname("p4.jpg").regdate(new Date()).build());
-        items.add(Item.builder().id(5).name("HOUSHOU MARIN").price(3440000).imgname("p5.jpg").regdate(new Date()).build());
+    @RequestMapping("/addimpl")
+    public String addimpl(Model model, ItemDto itemDto) throws Exception {
+        // 데이터 입력
+        itemDto.setImgName(itemDto.getImage().getOriginalFilename());
+        itemService.add(itemDto);
 
-        model.addAttribute("items",items);
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"get");
-        return "index";
+        return "redirect:/item/get";
     }
 
+    @RequestMapping("/update")
+    public String update(Model model, ItemDto itemDto) throws Exception {
+        // id, name, price, imgname, or newimg
+        itemService.modify(itemDto);
+        return "redirect:/item/detail?id="+itemDto.getItemId();
+    }
+
+    @RequestMapping("/delete")
+    public String delete(Model model, @RequestParam("id") int id) throws Exception {
+        // id, name, price, imgname, or newimg
+        itemService.del(id);
+        return "redirect:/item/get";
+    }
+
+    @RequestMapping("/get")
+    public String get(Model model) throws Exception {
+        List<ItemDto> list = new ArrayList<>();
+        list = itemService.get();
+        model.addAttribute("itemlist",list);
+        model.addAttribute("center",dir+"get");
+
+
+        return "index";
+    }
+    @RequestMapping("/detail")
+    public String detail(Model model, @RequestParam("id") int id) throws Exception {
+        ItemDto itemDto = null;
+
+        itemDto = itemService.get(id);
+        model.addAttribute("item",itemDto);
+        model.addAttribute("center",dir+"detail");
+
+
+        return "index";
+    }
 }
