@@ -9,7 +9,6 @@
         SELECT * FROM item WHERE item_name LIKE CONCAT('%', #{name}, '%')
     </select>
 
-
     <select id="selectOne" parameterType="Integer" resultType="itemDto">
         SELECT * FROM item WHERE item_id=#{id}
     </select>

@@ -92,6 +92,7 @@
                     <button id="btn_update" type="button" class="btn btn-primary">Update</button>
                     <button id="btn_delete" type="button" class="btn btn-primary">Delete</button>
 
+
                 </form>
             </div>
         </div>

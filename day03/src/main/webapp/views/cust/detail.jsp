@@ -9,9 +9,9 @@
             });
             $('#delete_btn').click(() => {
                 let id = $('#id').val();
-                let c = confirm("삭제할꺼 ??");
+                let c = confirm("삭제하시겠습니까 ?");
                 if(c == true){
-                    location.href = '<c:url value="/car/deleteimpl"/>' + '?id=' + id;
+                    location.href='<c:url value="/cust/deleteimpl"/>'+'?id='+id;
                 }
 
             });
@@ -42,7 +42,7 @@
             // method, action
             $('#register_form').attr('method','post');
 
-            $('#register_form').attr('action','/car/updateimpl');
+            $('#register_form').attr('action','/cust/updateimpl');
             $('#register_form').submit();
         }
     };
@@ -59,15 +59,15 @@
             <form id="register_form">
                 <div class="form-group">
                     <label for="id">Id:<span id="id_span"></span></label>
-                    <input type="text" readonly value="${car.carId}" class="form-control" placeholder="Enter id" id="id" name="carId">
+                    <input type="text" readonly value="${cust.custId}" class="form-control" placeholder="Enter id" id="id" name="custId">
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label>
-                    <input type="password" value="${car.carPwd}" class="form-control" placeholder="Enter password" id="pwd" name="carPwd">
+                    <input type="password" value="${cust.custPwd}" class="form-control" placeholder="Enter password" id="pwd" name="custPwd">
                 </div>
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" value="${car.carName}" class="form-control" placeholder="Enter name" id="name" name="carName">
+                    <input type="text" value="${cust.custName}" class="form-control" placeholder="Enter name" id="name" name="custName">
                 </div>
                 <button type="button" id="update_btn" class="btn btn-primary">Update</button>
                 <button type="button" id="delete_btn" class="btn btn-primary">Delete</button>

@@ -1,47 +1,96 @@
 package edu.sm.controller;
 
-import edu.sm.app.dto.Item;
+import com.github.pagehelper.PageInfo;
+import edu.sm.app.dto.ItemDto;
+import edu.sm.app.dto.Search;
+import edu.sm.app.service.ItemService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 @RequestMapping("/item")
 public class ItemController {
 
-    String dir = "item/";
+    private final ItemService itemService;
+    private final String dir = "item/";
 
     @RequestMapping("")
     public String item(Model model) {
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"center");
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "center");
         return "index";
     }
+
     @RequestMapping("/add")
     public String add(Model model) {
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"add");
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "add");
         return "index";
     }
+
     @RequestMapping("/get")
-    public String get(Model model) {
-        List<Item> items = new ArrayList<>();
-        items.add(Item.builder().id(1).name("KORONE").price(10000).imgname("p1.jpg").regdate(new Date()).build());
-        items.add(Item.builder().id(2).name("SAKURA MIKO").price(20000).imgname("p2.jpg").regdate(new Date()).build());
-        items.add(Item.builder().id(3).name("OTONOSE KANADE").price(500000).imgname("p3.jpg").regdate(new Date()).build());
-        items.add(Item.builder().id(4).name("USADA PEKORA").price(40000).imgname("p4.jpg").regdate(new Date()).build());
-        items.add(Item.builder().id(5).name("HOUSHOU MARIN").price(3440000).imgname("p5.jpg").regdate(new Date()).build());
-
-        model.addAttribute("items",items);
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"get");
+    public String get(Model model) throws Exception {
+        List<ItemDto> items = itemService.get(); // 모든 아이템 가져오기
+        model.addAttribute("items", items);
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "get");
         return "index";
     }
 
+    @RequestMapping("/detail")
+    public String detail(Model model, @RequestParam("id") String id) throws Exception {
+        ItemDto itemDto = itemService.get(id);
+        model.addAttribute("item", itemDto);
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "detail");
+        return "index";
+    }
+
+    @RequestMapping("/updateimpl")
+    public String updateimpl(ItemDto itemDto) throws Exception {
+        itemService.modify(itemDto);
+        return "redirect:/item/detail?id=" + itemDto.getItemId();
+    }
+
+    @RequestMapping("/deleteimpl")
+    public String deleteimpl(@RequestParam("id") String id) throws Exception {
+        itemService.del(id);
+        return "redirect:/item/get";
+    }
+
+    @RequestMapping("/getpage")
+    public String getpage(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo, Model model) throws Exception {
+        PageInfo<ItemDto> p = new PageInfo<>(itemService.getPage(pageNo), 5); // 5: 한화면에 출력되는 개수
+        model.addAttribute("cpage", p);
+        model.addAttribute("target", "/item");
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "page");
+        return "index";
+    }
+
+    @RequestMapping("/search")
+    public String search(Model model) {
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "search");
+        return "index";
+    }
+
+    @RequestMapping("/findimpl")
+    public String findimpl(Model model, Search search, @RequestParam(value = "pageNo", defaultValue = "1") int pageNo) throws Exception {
+        PageInfo<ItemDto> p = new PageInfo<>(itemService.getFindPage(pageNo, search), 5); // 5: 하단 네비게이션 개수
+        model.addAttribute("cpage", p);
+        model.addAttribute("target", "item");
+        model.addAttribute("search", search);
+        model.addAttribute("left", dir + "left");
+        model.addAttribute("center", dir + "search");
+        return "index";
+    }
 }
