@@ -46,7 +46,7 @@ public class CustController {
         return "redirect:/cust/detail?id="+custDto.getCustId();
     }
     @RequestMapping("/deleteimpl")
-    public String deleteimpl(Model model, @RequestParam("id") String id
+    public String deleteimpl(Model model,  @RequestParam("id") String id
     ) throws Exception {
         custService.del(id);
         return "redirect:/cust/get";
@@ -57,20 +57,10 @@ public class CustController {
         model.addAttribute("center",dir+"add");
         return "index";
     }
-    @RequestMapping("/get")
-    public String get(Model model) throws Exception {
-        List<CustDto> custs = null;
-        custs = custService.get();
-
-        model.addAttribute("custs",custs);
-        model.addAttribute("left",dir+"left");
-        model.addAttribute("center",dir+"get");
-        return "index";
-    }
     @RequestMapping("/getpage")
     public String getpage(@RequestParam(value = "pageNo", defaultValue = "1") int pageNo, Model model) throws Exception {
         PageInfo<CustDto> p;
-        p = new PageInfo<>(custService.getPage(pageNo), 5);
+        p = new PageInfo<>(custService.getPage(pageNo), 5); // 5:하단 네비게이션 개수
         model.addAttribute("cpage",p);
         model.addAttribute("target","/cust");
         model.addAttribute("left",dir+"left");
@@ -79,17 +69,32 @@ public class CustController {
     }
     @RequestMapping("/search")
     public String search(Model model) {
+
         model.addAttribute("left",dir+"left");
         model.addAttribute("center",dir+"search");
         return "index";
     }
     @RequestMapping("/findimpl")
-    public String findimpl(Model model, Search search) {
-        log.info("Search : " + search.toString());
+    public String findimpl(Model model, Search search, @RequestParam(value = "pageNo", defaultValue = "1") int pageNo) throws Exception {
+        PageInfo<CustDto> p;
 
+        p = new PageInfo<>(custService.getFindPage(pageNo, search), 3); // 5:하단 네비게이션 개수
+        model.addAttribute("cpage",p);
+        model.addAttribute("target","cust");
         model.addAttribute("search",search);
         model.addAttribute("left",dir+"left");
         model.addAttribute("center",dir+"search");
+        return "index";
+    }
+
+    @RequestMapping("/get")
+    public String get(Model model) throws Exception {
+        List<CustDto> custs = null;
+        custs = custService.get();
+
+        model.addAttribute("custs",custs);
+        model.addAttribute("left",dir+"left");
+        model.addAttribute("center",dir+"get");
         return "index";
     }
 

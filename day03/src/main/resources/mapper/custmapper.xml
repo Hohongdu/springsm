@@ -11,16 +11,15 @@
     <select id="getpage" resultType="custDto">
         SELECT * FROM cust
     </select>
-    <select id="getfindpage" resultType="custDto">
-        SELECT * FROM cust where 1 = 1
-        <if test = "keyword == 'id'">
-            AND cust_id LIKE '%' || #{search} || '%'
+    <select id="getfindpage" resultType="custDto" parameterType="search">
+        SELECT * FROM cust WHERE 1=1
+        <if test="keyword == 'id'">
+            AND cust_id LIKE CONCAT('%', #{search}, '%')
         </if>
-        <if test = "keyword == 'name'">
-            AND cust_name LIKE '%' || #{search} || '%'
+        <if test="keyword == 'name'">
+            AND cust_name LIKE CONCAT('%', #{search}, '%')
         </if>
     </select>
-
 
 
     <select id="selectOne" parameterType="String" resultType="custDto">

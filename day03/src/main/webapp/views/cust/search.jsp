@@ -11,18 +11,18 @@
                     <h5>Search</h5>
                 </div>
                 <div class="col-sm-3">
-                    <select class="form-control" id="sel1">
+                    <select class="form-control" name="keyword">
                         <option value="id"
-                                <c:if test = "${search.keyword == 'id'}"> selected </c:if>
+                                <c:if test="${search.keyword == 'id'}"> selected </c:if>
                         >ID</option>
                         <option value="name"
-                                <c:if test = "${search.keyword == 'name'}"> selected </c:if>
+                                <c:if test="${search.keyword == 'name'}"> selected </c:if>
                         >NAME</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
                     <input type="text" class="form-control" name="search"
-                    <c:if test = "${search.search != null}"> value = ${search.search}</c:if>
+                    <c:if test="${search.search != null}"> value="${search.search}" </c:if>
                     >
                 </div>
                 <div class="col-sm-3">
@@ -40,7 +40,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="c" items="${custs}">
+        <c:forEach var="c" items="${cpage.getList()}">
             <tr>
                 <td><a href="/cust/detail?id=${c.custId}">${c.custId}</a></td>
                 <td>${c.custPwd}</td>
@@ -49,4 +49,8 @@
         </c:forEach>
         </tbody>
     </table>
+
+    <c:if test="${cpage.getSize() != null}">
+        <jsp:include page="../searchnav.jsp"/>
+    </c:if>
 </div>

@@ -3,9 +3,11 @@ package edu.sm.app.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import edu.sm.app.dto.CustDto;
+import edu.sm.app.dto.Search;
 import edu.sm.app.frame.SMService;
 import edu.sm.app.repository.CustRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,4 +50,9 @@ public class CustService implements SMService<String, CustDto> {
         PageHelper.startPage(pageNo, 5); // 3: 한화면에 출력되는 개수
         return custRepository.getpage();
     }
+    public Page<CustDto> getFindPage(int pageNo, Search search) throws Exception {
+        PageHelper.startPage(pageNo, 2); // 3: 한화면에 출력되는 개수
+        return custRepository.getfindpage(search);
+    }
+
 }
