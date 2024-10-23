@@ -21,6 +21,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="admin.main" target="17" />
+      <module name="admin.test" target="17" />
       <module name="day02-1" target="17" />
       <module name="day02-1.main" target="17" />
       <module name="day02-1.test" target="17" />
