@@ -43,10 +43,10 @@
         <tbody>
         <c:forEach var="c" items="${cpage.getList()}">
             <tr>
-                <td><a href="/item/detail?id=${c.id}">${c.id}</a></td>
-                <td>${c.name}</td>
-                <td>${c.price}</td>
-                <td>${c.regdate}</td>
+                <td><a href="/item/detail?id=${c.itemId}">${c.itemId}</a></td>
+                <td>${c.itemName}</td>
+                <td>${c.itemPrice}</td>
+                <td>${c.regDate}</td>
             </tr>
         </c:forEach>
         </tbody>
