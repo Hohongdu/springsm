@@ -23,29 +23,28 @@ public class ItemService implements SMService<Integer, ItemDto> {
 
     @Override
     public void add(ItemDto itemDto) throws Exception {
-        FileUploadUtil.saveFile(itemDto.getImage(), imgdir);
+        FileUploadUtil.saveFile(itemDto.getImage(),imgdir);
         itemRepository.insert(itemDto);
     }
 
     @Override
     public void modify(ItemDto itemDto) throws Exception {
-        if (itemDto.getImage().isEmpty()) {
+        if(itemDto.getImage().isEmpty()){
             itemRepository.update(itemDto);
-        } else {
+        }else{
             String oldimg = itemDto.getImgName();
             itemDto.setImgName(itemDto.getImage().getOriginalFilename());
             itemRepository.update(itemDto);
 
-            FileUploadUtil.saveFile(itemDto.getImage(), imgdir);
-            FileUploadUtil.deleteFile(oldimg, imgdir);
+            FileUploadUtil.saveFile(itemDto.getImage(),imgdir);
+            FileUploadUtil.deleteFile(oldimg,imgdir);
         }
     }
 
-
     @Override
     public void del(Integer s) throws Exception {
-        String imgName = itemRepository.selectOne(s).getImgName();
-        FileUploadUtil.deleteFile(imgName, imgdir);
+        String imgname = itemRepository.selectOne(s).getImgName();
+        FileUploadUtil.deleteFile(imgname,imgdir);
         itemRepository.delete(s);
     }
 
@@ -63,3 +62,11 @@ public class ItemService implements SMService<Integer, ItemDto> {
         return itemRepository.findByName(name);
     }
 }
+
+
+
+
+
+
+
+

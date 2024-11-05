@@ -1,5 +1,6 @@
 package edu.sm.controller;
 
+
 import edu.sm.app.dto.CustDto;
 import edu.sm.app.service.CustService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,6 @@ import java.util.List;
 public class CustController {
 
     final CustService custService;
-
 
     String dir = "cust/";
     @RequestMapping("/get")
@@ -40,7 +40,6 @@ public class CustController {
         model.addAttribute("center",dir+"add");
         return "index";
     }
-
 
     @RequestMapping("/detail")
     public String detail(Model model,@RequestParam("id") String id){

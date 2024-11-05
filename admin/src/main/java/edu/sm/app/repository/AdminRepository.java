@@ -1,5 +1,6 @@
 package edu.sm.app.repository;
 
+
 import edu.sm.app.dto.AdminDto;
 import edu.sm.app.frame.SMRepository;
 import org.apache.ibatis.annotations.Mapper;

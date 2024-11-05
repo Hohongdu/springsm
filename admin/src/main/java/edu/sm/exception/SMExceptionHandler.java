@@ -10,18 +10,17 @@ import java.sql.SQLIntegrityConstraintViolationException;
 
 @ControllerAdvice
 @Slf4j
-
 public class SMExceptionHandler {
 
     @ExceptionHandler(DuplicateKeyException.class)
     public String ex2(Model model, DuplicateKeyException e) {
-        model.addAttribute("msg","ID가 중복임");
+        model.addAttribute("msg", "ID가 중복");
         model.addAttribute("center","error");
         return "index";
     }
     @ExceptionHandler(Exception.class)
     public String ex1(Model model, Exception e) {
-        model.addAttribute("msg",e.getMessage());
+        model.addAttribute("msg", e.getMessage());
         model.addAttribute("center","error");
         return "index";
     }

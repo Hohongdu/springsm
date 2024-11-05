@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 public class MainInputController {
 
     final CustService custService;
+    final BCryptPasswordEncoder passwordEncoder;
 
     @RequestMapping("/logoutimpl")
     public String logoutimpl(HttpSession session, Model model) {
@@ -45,7 +47,7 @@ public class MainInputController {
             model.addAttribute("center","loginfail");
         }else{
             // OK
-            if(custDto.getCustPwd().equals(pwd)){
+            if(passwordEncoder.matches(pwd, custDto.getCustPwd())){
                 session.setAttribute("loginid",custDto);
                 next = "redirect:/";
             }else{
@@ -57,14 +59,15 @@ public class MainInputController {
 
     @RequestMapping("/registerimpl")
     public String registerimpl(Model model,
-                               CustDto custDto,
-                               HttpSession session) throws DuplicateKeyException,Exception {
+                            CustDto custDto,
+                            HttpSession session) throws DuplicateKeyException,Exception {
         log.info("Cust Info: "+custDto.toString());
         try {
+            custDto.setCustPwd(passwordEncoder.encode(custDto.getCustPwd()));
             custService.add(custDto);
-        } catch (DuplicateKeyException e) {
+        }catch(DuplicateKeyException e){
             throw e;
-        } catch (Exception e){
+        } catch(Exception e){
             throw e;
         }
         session.setAttribute("loginid",custDto);

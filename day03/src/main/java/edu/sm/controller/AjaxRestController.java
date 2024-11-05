@@ -3,14 +3,19 @@ package edu.sm.controller;
 import edu.sm.app.dto.CustDto;
 import edu.sm.app.dto.Marker;
 import edu.sm.app.service.CustService;
+import edu.sm.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,6 +28,16 @@ import java.util.Random;
 public class AjaxRestController {
 
     final CustService custService;
+
+    @Value("${app.dir.uploadimgdir}")
+    String uploadImgDir;
+
+    @RequestMapping("/saveimg")
+    public String saveimg(@RequestParam("file") MultipartFile file) throws IOException {
+        String imgname = file.getOriginalFilename();
+        FileUploadUtil.saveFile(file, uploadImgDir);
+        return imgname;
+    }
 
     @RequestMapping("/getmarkers")
     public Object getmarkers(@RequestParam("target") int target){

@@ -14,6 +14,7 @@ class DeleteTest {
 
     @Test
     void contextLoads() {
+
         String id = "id02";
         try {
             custService.del(id);

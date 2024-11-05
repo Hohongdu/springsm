@@ -11,9 +11,14 @@ import java.util.List;
 
 @Repository
 @Mapper
-public interface CustRepository extends SMRepository <String, CustDto> {
+public interface CustRepository extends SMRepository<String, CustDto> {
     List<CustDto> findByName(String name);
     Page<CustDto> getpage() throws Exception;
     Page<CustDto> getfindpage(Search search) throws Exception;
-
 }
+
+
+
+
+
+

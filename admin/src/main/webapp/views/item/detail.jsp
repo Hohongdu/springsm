@@ -18,7 +18,7 @@
 
                 let c = confirm('수정하시겠습니까?');
                 if(c == true){
-                    this.send();
+                   this.send();
                 }
             });
         },
@@ -35,7 +35,6 @@
         item_detail.init();
     });
 </script>
-
 
 
 
@@ -91,7 +90,6 @@
                     </div>
                     <button id="btn_update" type="button" class="btn btn-primary">Update</button>
                     <button id="btn_delete" type="button" class="btn btn-primary">Delete</button>
-
 
                 </form>
             </div>

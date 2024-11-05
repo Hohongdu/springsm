@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -22,6 +23,10 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <%--HighCharts Lib  end --%>
 
+    <%-- Web Socket Lib    --%>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+
     <style>
         .fakeimg {
             height: 200px;
@@ -32,9 +37,10 @@
 <body>
 
 <div class="jumbotron text-center" style="margin-bottom:0">
-    <h1>My First Bootstrap 4 Page</h1>
-    <img style="width: 200px" src="<c:url value="/img/bike.jpg"/> ">
-    <img style="width: 200px" src="<c:url value="/imgs/m.jpg"/> ">
+    <h1><spring:message code="site.title"/></h1>
+    <h4><spring:message code="site.tel" arguments="041-312-3234"/></h4>
+    <img src="<c:url value="/img/bike.jpg"/> ">
+    <img src="<c:url value="/imgs/m.jpg"/> ">
     <p>Resize this responsive page to see the effect!</p>
 </div>
 <ul class="nav justify-content-end">
@@ -89,7 +95,13 @@
                     <a class="nav-link" href="<c:url value="/item"/> ">Item</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/car"/> ">Car</a>
+                    <a class="nav-link" href="<c:url value="/webcam"/> ">WebCam</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/websocket"/> ">websocket</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/chat"/> ">chat</a>
                 </li>
             </c:if>
         </ul>
@@ -99,12 +111,12 @@
 <div class="container" style="margin-top:30px">
     <div class="row">
         <c:choose>
-            <c:when test="${left == null}">
-                <jsp:include page="left.jsp"/>
-            </c:when>
-            <c:otherwise>
-                <jsp:include page="${left}.jsp"/>
-            </c:otherwise>
+          <c:when test="${left == null}">
+              <jsp:include page="left.jsp"/>
+          </c:when>
+          <c:otherwise>
+              <jsp:include page="${left}.jsp"/>
+          </c:otherwise>
         </c:choose>
         <c:choose>
             <c:when test="${center == null}">

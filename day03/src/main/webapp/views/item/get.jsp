@@ -3,35 +3,37 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
-    #item_img{
-        width:80px;
-    }
+  #item_img{
+    width:80px;
+  }
 </style>
 
 
 <div class="col-sm-10">
-    <h2>Item Get Page</h2>
-    <h5>Title description, Sep 2, 2017</h5>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th>Image</th>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>RegDate</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="c" items="${items}">
-            <tr>
-                <td><img id="item_img" src="<c:url value="/img"/>/${c.imgName}"></td>
-                <td>${c.itemId}</td>
-                <td><a href="/item/detail?id=${c.itemName}">${c.itemName}</a></td>
-                <td>${c.formattedRegDate}</td>
-                <td>${c.formattedUpdateDate}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+  <h2>Item Get Page</h2>
+  <h5>Title description, Sep 2, 2017</h5>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Image</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>RegDate</th>
+      </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="c" items="${items}">
+      <tr>
+        <td><img id="item_img" src="<c:url value="/img"/>/${c.imgname}"></td>
+        <td>${c.id}</td>
+        <td>${c.name}</td>
+        <td><fmt:formatNumber type="number" pattern="###,###원" value="${c.price}" />
+        </td>
+        <td><fmt:formatDate  value="${c.regdate}" pattern="yyyy년MM월dd일" />
+        </td>
+      </tr>
+    </c:forEach>
+    </tbody>
+  </table>
 </div>

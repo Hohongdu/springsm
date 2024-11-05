@@ -3,6 +3,6 @@
 
 <div class="col-sm-10">
 
-    <h2>Login Fail</h2>
-    <h5>ID 또는 Password가 틀렸습니다 슈벌럼아</h5>
+  <h2>Login Fail</h2>
+  <h5>ID또는 Password가 틀렸습니다.</h5>
 </div>

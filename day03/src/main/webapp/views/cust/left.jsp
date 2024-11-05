@@ -3,20 +3,20 @@
 
 <div class="col-sm-2">
 
-    <h3>Cust</h3>
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/cust/add"/> ">Add</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/cust/get"/>">Get</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/cust/getpage"/> ">GET Page</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/cust/findimpl"/>">Search</a>
-        </li>
-    </ul>
-    <hr class="d-sm-none">
+  <h3>Cust</h3>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/cust/add"/> ">Add</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/cust/get"/>">Get</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/cust/getpage"/>">GetPage</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/cust/findimpl"/>">Search</a>
+    </li>
+  </ul>
+  <hr class="d-sm-none">
 </div>

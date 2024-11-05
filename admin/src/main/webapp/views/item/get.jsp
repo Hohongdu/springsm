@@ -48,13 +48,11 @@
                         <tr>
                             <td>
                                 <a href="<c:url value="/item/detail"/>?id=${item.itemId}">
-                                    <img src="<c:url value="/imgs"/>/${item.imgName}">
+                                    <img  src="<c:url value="/imgs"/>/${item.imgName}">
                                 </a>
                             </td>
                             <td>${item.itemId}</td>
                             <td>${item.itemName}</td>
-                            <td>
-                                <fmt:formatNumber type="number" pattern="###,###원" value="${item.itemPrice}" />                           </td>
                             <td>
                                 <fmt:formatNumber type="number" pattern="###,###원" value="${item.itemPrice}" />                           </td>
                             <td>

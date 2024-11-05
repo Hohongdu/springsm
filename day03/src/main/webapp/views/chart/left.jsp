@@ -3,17 +3,17 @@
 
 <div class="col-sm-2">
 
-    <h3>Chart</h3>
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/chart/chart1"/> ">chart1</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/chart/chart2"/>">chart2</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/chart/chart3"/>">chart3</a>
-        </li>
-    </ul>
-    <hr class="d-sm-none">
+  <h3>Chart</h3>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/chart/chart1"/> ">chart1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/chart/chart2"/>">chart2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/chart/chart3"/>">chart3</a>
+    </li>
+  </ul>
+  <hr class="d-sm-none">
 </div>

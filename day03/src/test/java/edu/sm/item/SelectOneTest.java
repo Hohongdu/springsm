@@ -1,5 +1,6 @@
 package edu.sm.item;
 
+import edu.sm.app.service.CustService;
 import edu.sm.app.service.ItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ class SelectOneTest {
 
     @Test
     void contextLoads() {
-        String id = "id02";
+        int id = 1;
         try {
             itemService.get(id);
         } catch (Exception e) {

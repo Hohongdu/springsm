@@ -16,17 +16,14 @@ public class AdminService implements SMService<String, AdminDto> {
 
     @Override
     public void add(AdminDto adminDto) throws Exception {
-
     }
 
     @Override
     public void del(String s) throws Exception {
-
     }
 
     @Override
     public void modify(AdminDto adminDto) throws Exception {
-
     }
 
     @Override

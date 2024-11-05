@@ -39,10 +39,10 @@ public class ChartsRestController {
         String endline = "";
         String endTime = "";
         while((lineData = reader.readNext()) != null){
-            jsonArray1.add(Float.parseFloat(lineData[1]));
-            timeArray.add(lineData[0]);
-            endTime = lineData[0];
-            endline = lineData[1];
+           jsonArray1.add(Float.parseFloat(lineData[1]));
+           timeArray.add(lineData[0]);
+           endTime = lineData[0];
+           endline = lineData[1];
         }
 
         jsonObject.put("data", jsonArray1);

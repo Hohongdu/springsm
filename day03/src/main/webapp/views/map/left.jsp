@@ -3,17 +3,17 @@
 
 <div class="col-sm-2">
 
-    <h3>Map</h3>
-    <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/map/map1"/> ">map1</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/map/map2"/>">map2</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="<c:url value="/map/map3"/>">map3</a>
-        </li>
-    </ul>
-    <hr class="d-sm-none">
+  <h3>Map</h3>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/map/map1"/> ">map1</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/map/map2"/>">map2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="<c:url value="/map/map3"/>">map3</a>
+    </li>
+  </ul>
+  <hr class="d-sm-none">
 </div>

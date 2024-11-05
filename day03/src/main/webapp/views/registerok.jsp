@@ -3,6 +3,6 @@
 
 <div class="col-sm-10">
 
-    <h2>Register OK</h2>
-    <h5>${sessionScope.get("loginid").custName}님 어서오고 ㅋㅋ</h5>
+  <h2>Register OK</h2>
+  <h5>${sessionScope.loginid.custName} 님 환영 합니다.</h5>
 </div>

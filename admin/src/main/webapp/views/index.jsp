@@ -32,8 +32,8 @@
     <script src="<c:url value="/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
 
     <%-- Web Socket Lib    --%>
-<%--    <script src="/webjars/sockjs-client/sockjs.min.js"></script>--%>
-<%--    <script src="/webjars/stomp-websocket/stomp.min.js"></script>--%>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="<c:url value="/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
@@ -327,7 +327,8 @@
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone</div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people say this to all dogs, even if they aren't good...</div>
                                         <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                     </div>
                                 </a>
@@ -420,12 +421,12 @@
                     <form id="login_form">
                         <div class="form-group">
                             <label for="id">ID:</label>
-                            <input type="text" value = "admin1"class="form-control" id="id" placeholder="Enter id" name="id">
+                            <input type="text" class="form-control" id="id" placeholder="Enter id" name="id">
 
                         </div>
                         <div class="form-group">
                             <label for="pwd">Password:</label>
-                            <input type="password" value="111111" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
 
                         </div>
 

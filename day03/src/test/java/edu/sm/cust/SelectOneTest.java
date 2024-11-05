@@ -1,5 +1,6 @@
 package edu.sm.cust;
 
+import edu.sm.app.dto.CustDto;
 import edu.sm.app.service.CustService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,8 @@ class SelectOneTest {
     void contextLoads() {
         String id = "id88";
         try {
-            custService.get();
+            CustDto custDto = custService.get(id);
+            log.info(custDto.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

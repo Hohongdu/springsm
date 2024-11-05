@@ -3,8 +3,6 @@
 
 <div class="col-sm-10">
 
-    <h2>Go Page</h2>
-    <h5>${target}</h5>
-    <div class="fakeimg">Fake Image</div>
-    <hr class="d-sm-none">
+  <h2>Go Page</h2>
+  <h3>${target}</h3>
 </div>
