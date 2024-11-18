@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/admin" />
+    <file type="web" url="file://$PROJECT_DIR$/admin_01" />
     <file type="web" url="file://$PROJECT_DIR$/day02" />
     <file type="web" url="file://$PROJECT_DIR$/day02-1" />
     <file type="web" url="file://$PROJECT_DIR$/day021" />

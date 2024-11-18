@@ -13,12 +13,10 @@ spring:
       prefix: /views/
       suffix: .jsp
   datasource:
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:mysql://127.1.0.1:3306/smdb?characterEncoding=utf8
-    #driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:mysql://127.0.0.1:3306/smdb?characterEncoding=utf8
-    username: ENC(fGsN6SwFRd3uGcmdRmsGCw==)
-    password: ENC(9InL1LFs0co8Hug4cT2/2A==)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://223.130.159.25:3306/smdb?characterEncoding=utf8
+    username: smuser
+    password: Sum1212!!
 
 # 3. Mybatis Setting
 mybatis:
@@ -37,10 +35,10 @@ app:
   url:
     server-url: http://210.119.34.204:81
   dir:
-    imgdir: file:///c:/springsm/imgs/
-    uploadimgdir: c:/springsm/imgs/
-    logdir: file:///c:/springsm/logs/
-    readlogdir: c:/springsm/logs/
+    imgdir: /root/imgs/
+    uploadimgdir: /root/imgs/
+    logdir: /root/logs/
+    readlogdir: /root/logs/
   key:
     wkey: ENC(QdOsjLohLq1MPwpHZYB9hMyr+NY0bXXyORg1vRQEnmXS59mZAkg+vRNof9FFPDLTkMZLaMkMQ9NHNu8bI2/ZJQFb304B3s/MIJnouj5n9u9qUhyp2smp4mXRaqQz3KdpVmVZZSxLehC6Le73m78zGA==)
     wkey2: ENC(AGzLAgsPMOJE5zDYsXEricMGvjB/S1GVF2ZFRTuO9qjnlj/sMv6d/xF0pAuzWJkn)
