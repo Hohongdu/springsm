@@ -1,8 +1,11 @@
 package edu.sm.controller;
 
+import edu.sm.app.dto.OcrDto;
 import edu.sm.util.FileUploadUtil;
+import edu.sm.util.OCRUtil;
 import edu.sm.util.WeatherUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -25,6 +29,9 @@ public class MainController {
     String wkey2;
     @Value("${app.url.server-url}")
     String serverurl;
+    @Value("${app.dir.uploadimgdir}")
+    String uploadImgDir;
+
 
     @RequestMapping("/")
     public String main(Model model) {
@@ -82,6 +89,25 @@ public class MainController {
         log.info(WeatherUtil.getWeather2("1835848",wkey2).toString());
         return WeatherUtil.getWeather2("1835848",wkey2);
     }
+    @RequestMapping("/ocr")
+    public String ocr(Model model){
+        model.addAttribute("center","ocr");
+        return "index";
+    }
+    @RequestMapping("/ocrimpl")
+    public String ocrimpl(Model model, OcrDto ocrDto) throws IOException {
+        String imgname = ocrDto.getImage().getOriginalFilename();
+
+        FileUploadUtil.saveFile(ocrDto.getImage(), uploadImgDir);
+        JSONObject jsonObject = OCRUtil.getResult(uploadImgDir, imgname);
+        Map<String, String> map = OCRUtil.getData(jsonObject);
+
+        model.addAttribute("result",map);
+        model.addAttribute("imgname",imgname);
+        model.addAttribute("center","ocr");
+        return "index";
+    }
+
 }
 
 

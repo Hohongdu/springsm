@@ -7,7 +7,7 @@
   <p>Lorem ipsum dolor sit ame.</p>
   <ul class="nav nav-pills flex-column">
     <li class="nav-item">
-      <a class="nav-link" href="#">Active</a>
+      <a class="nav-link" href="<c:url value="/ocr" />">OCR</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Link</a>
