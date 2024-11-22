@@ -36,6 +36,8 @@ logging:
 app:
   url:
     server-url: http://210.119.34.204:81
+    chatbot: https://3vd0tljt1i.apigw.ntruss.com/custom/v1/16307/a39b32492df35396c54ba9401f570accb402fa90e1245b1e3f77c7bdb3d4e25d
+
   dir:
     imgdir: file:///c:/springsm/imgs/
     uploadimgdir: c:/springsm/imgs/
@@ -47,6 +49,8 @@ app:
     algo: PBEWithMD5AndDES
     skey: mykey
     kakao_rest_key : 54b4e3a2c1bd55bc5d617fdc4ac9cfe3
+    chatbot: QmFmSEdIZlVlTUNadE1ld21OVkRHbmZ5RGFqempub2w=
+
 
 
 

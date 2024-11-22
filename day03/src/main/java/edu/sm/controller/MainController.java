@@ -32,17 +32,39 @@ public class MainController {
     @Value("${app.dir.uploadimgdir}")
     String uploadImgDir;
 
-
     @RequestMapping("/")
     public String main(Model model) {
         log.info("Start Main ,,,,,,");
         return "index";
     }
 
+    @RequestMapping("/ocr")
+    public String ocr(Model model) {
+        model.addAttribute("center", "ocr");
+        return "index";
+    }
+    @RequestMapping("/ocrimpl")
+    public String ocrimpl(Model model, OcrDto ocrDto) throws IOException {
+        String imgname = ocrDto.getImage().getOriginalFilename();
+
+        FileUploadUtil.saveFile(ocrDto.getImage(), uploadImgDir);
+        JSONObject jsonObject = OCRUtil.getResult(uploadImgDir, imgname);
+        Map<String, String> map = OCRUtil.getData(jsonObject);
+
+        model.addAttribute("result",map);
+        model.addAttribute("imgname",imgname);
+        model.addAttribute("center","ocr");
+        return "index";
+    }
     @RequestMapping("/chat")
     public String chat(Model model) {
         model.addAttribute("serverurl", serverurl);
         model.addAttribute("center", "chat");
+        return "index";
+    }
+    @RequestMapping("/chatbot")
+    public String chatbot(Model model) {
+        model.addAttribute("center", "chatbot");
         return "index";
     }
 
@@ -89,30 +111,4 @@ public class MainController {
         log.info(WeatherUtil.getWeather2("1835848",wkey2).toString());
         return WeatherUtil.getWeather2("1835848",wkey2);
     }
-    @RequestMapping("/ocr")
-    public String ocr(Model model){
-        model.addAttribute("center","ocr");
-        return "index";
-    }
-    @RequestMapping("/ocrimpl")
-    public String ocrimpl(Model model, OcrDto ocrDto) throws IOException {
-        String imgname = ocrDto.getImage().getOriginalFilename();
-
-        FileUploadUtil.saveFile(ocrDto.getImage(), uploadImgDir);
-        JSONObject jsonObject = OCRUtil.getResult(uploadImgDir, imgname);
-        Map<String, String> map = OCRUtil.getData(jsonObject);
-
-        model.addAttribute("result",map);
-        model.addAttribute("imgname",imgname);
-        model.addAttribute("center","ocr");
-        return "index";
-    }
-
 }
-
-
-
-
-
-
-
